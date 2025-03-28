@@ -79,20 +79,22 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
-                {% for expense in expenses %}
-                    <tr>
-                        <td>{{ expense[0] }}</td>
-                        <td>{{ expense[1] }}</td>
-                        <td>{{ expense[2] }}</td>
-                        <td>{{ expense[3] }}</td>
-                        <td>{{ expense[4] }}</td>
-                        <td>{{ expense[5] }}</td>
-                        <td>
-			    <a href="{{ url_for('delete_expense', expense_id=expense['id']) }}" class="btn btn-danger btn-sm">Delete</a></td> </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
+	    <tbody>
+             {% for expense in expenses %}
+        <tr>
+            <td>{{ expense['id'] }}</td>          
+            <td>{{ expense['description'] }}</td> 
+            <td>{{ expense['amount'] }}</td>      
+            <td>{{ expense['category'] }}</td>    
+            <td>{{ expense['currency'] }}</td>    
+            <td>{{ expense['date'] }}</td>        
+            <td>
+                <a href="{{ url_for('delete_expense', expense_id=expense['id']) }}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+    {% endfor %}
+</tbody>
+
         </table>
     </div>
 
@@ -106,7 +108,6 @@
         row.style.display = description.includes(input) ? "" : "none";
     });
 }
-
 function sortExpenses() {
     let table = document.getElementById("expenseTable");
     let rows = Array.from(table.querySelectorAll("tbody tr")); // Select rows properly
